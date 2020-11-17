@@ -72,7 +72,7 @@ def load_topic(course_id: str, topic_id: str):
     path = CONTENT_PATH + f"/courses/{course_id}/topics/{topic_id}/index.json"
     topic_json = Path(path).read_text()
     topic = json.loads(topic_json)
-    lessons = [Lesson(lesson['id'], topic_id, lesson['title'], lesson['authorId'], lesson['duration'],
+    lessons = [Lesson(lesson['id'], topic_id, lesson['title'], lesson['authorIds'], lesson['duration'],
                       [LessonPrereq(prereq['lessonId'], prereq['topicId']) for prereq in
                        emptyIfNone(lesson.get('prerequisites'))])
                for lesson in topic['lessons']]
