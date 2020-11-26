@@ -6,6 +6,7 @@
       "id": "basics",
       "title": "Basics",
       "authorIds": [
+        "jon-pretty",
         "szymon-rodziewicz"
       ],
       "duration": 20,
@@ -22,6 +23,7 @@
       "id": "lists",
       "title": "Lists and Sets",
       "authorIds": [
+        "jon-pretty",
         "szymon-rodziewicz"
       ],
       "video": "https://www.youtube.com/embed/0_NrC9rK6Pg",
