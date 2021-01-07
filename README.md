@@ -1,24 +1,31 @@
 # ScalaZONE Content
 
-This repository contains the content of the [ScalaZONE website](https://scala.zone). It stores both lesson text and course structure. Everyone is welcome to make PRs with suggestions.
+This repository contains the content of the [ScalaZONE website](https://scala.zone). It stores both lesson text and
+course structure. Everyone is welcome to make PRs with suggestions.
 
-## Licence	
-Content is distributed under the [CreativeCommons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode) licence.	
+## Licence
+
+Content is distributed under
+the [CreativeCommons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/legalcode) licence.
 
 ## Deployment triggers
- - Every commit to the `develop` branch updates the content in the development environment.
- - Every commit to the `stage` branch updates the content in the staging environment.
- - Every commit to the `main` branch updates the content in the production environment.
 
-Only the production environment is accessible to the public.
-People outside of [VirtusLab](https://virtuslab.com) and [Propensive](https://propensive.com) do not have access to the `develop` and `stage` environments, but access will be provided
-on request.
+- Every commit to the `develop` branch updates the content in the development environment.
+- Every commit to the `stage` branch updates the content in the staging environment.
+- Every commit to the `main` branch updates the content in the production environment.
+
+Only the production environment is accessible to the public. People outside of [VirtusLab](https://virtuslab.com)
+and [Propensive](https://propensive.com) do not have access to the `develop` and `stage` environments, but access will
+be provided on request.
 
 ## Structure overview
 
 ### Courses
 
-Courses are the top-level entity in the ScalaZONE material structure. Their structure is stored in the [courses](/courses) directory. The [courses/index.json](/courses/index.json) file stores a list with all available courses. For each course there is a directory named after the course id that contains the course structure. Basic course data is stored in the `index.json` file in this directory. Here is the `Course` JSON type structure:
+Courses are the top-level entity in the ScalaZONE material structure. Their structure is stored in
+the [courses](/courses) directory. The [courses/index.json](/index.json) file stores a list with all available courses.
+For each course there is a directory named after the course id that contains the course structure. Basic course data is
+stored in the `index.json` file in this directory. Here is the `Course` JSON type structure:
 
 | Field name | Type            | Description                                                                            |
 |------------|-----------------|----------------------------------------------------------------------------------------|
@@ -32,11 +39,14 @@ Courses are the top-level entity in the ScalaZONE material structure. Their stru
 
 ### Course Levels
 
-Course levels are parts of the course that are suited for users starting with different ability levels. There are three levels that are possible to add to a course:
- - Beginner
- - Intermediate
- - Advanced
-To add a level to a course, it must be present in the `levels` field in the course's index.json file. Level can be configured using `<level>.json` file in the course directory, where `<level>` is either `beginner`, `intermediate` or `advanced`. Here is the `Level` JSON structure:
+Course levels are parts of the course that are suited for users starting with different ability levels. There are three
+levels that are possible to add to a course:
+
+- Beginner
+- Intermediate
+- Advanced To add a level to a course, it must be present in the `levels` field in the course's index.json file. Level
+  can be configured using `<level>.json` file in the course directory, where `<level>` is either `beginner`
+  , `intermediate` or `advanced`. Here is the `Level` JSON structure:
 
 | Field name | Type                       | Description                                                |
 |------------|----------------------------|------------------------------------------------------------|
@@ -52,11 +62,15 @@ And the `TopicRange` type has the following structure in json:
 | `lessonStart` | String | Id of the first lesson of the topic included in the level |
 | `lessonEnd`   | String | Id of the last lesson of the topic included in the topic  |
 
-Topic ranges define what topics and lessons are present in a course level. By specifying this, we are able to use only a slice of a topic for a particular course level. These slices may, however, overlap between level, so that a particular lesson may appear in more than one level.
+Topic ranges define what topics and lessons are present in a course level. By specifying this, we are able to use only a
+slice of a topic for a particular course level. These slices may, however, overlap between level, so that a particular
+lesson may appear in more than one level.
 
 ### Topics
 
-Topics are ordered collections of lessons. Their index is stored in the [topics/index.json] file. The structure of a single topic is defined in the `index.json` file inside the specific directory named after the topic in the `topics` directory. This `index.json` file has following JSON structure:
+Topics are ordered collections of lessons. Their index is stored in the [topics/index.json] file. The structure of a
+single topic is defined in the `index.json` file inside the specific directory named after the topic in the `topics`
+directory. This `index.json` file has following JSON structure:
 
 | Field name | Type           | Description                                      |
 |------------|----------------|--------------------------------------------------|
@@ -85,10 +99,13 @@ The `LessonPrerequisite` JSON type structure:
 
 ### Lessons
 
-A lesson's content files are present in the topics directory, within a directory specific to the lesson's topic. The content file must be named after the lesson id and have a `.md` file extension. This file defines the text and questions that user sees after entering the lesson page. 
-You can use most of the markdown features inside of it, including tables, images and a special syntax for videos.
+A lesson's content files are present in the topics directory, within a directory specific to the lesson's topic. The
+content file must be named after the lesson id and have a `.md` file extension. This file defines the text and questions
+that user sees after entering the lesson page. You can use most of the markdown features inside of it, including tables,
+images and a special syntax for videos.
 
 #### Video syntax
+
 To embed a video inside a lesson you can use the following syntax:
 
 ```md
@@ -97,17 +114,28 @@ To embed a video inside a lesson you can use the following syntax:
 
 #### Questions section
 
-The first part of every lesson's markdown file is the lesson's content: the text that is visible on the lessons page, and is meant to explain a concept specific to this lesson. After this first part, it is possible to include questions testing the user's understanding at the end of the lesson. To do so, first introduce the questions section separator: `?---?` and write your questions after it. At this moment there are two types of questions: _single answer questions_ (using radio buttons) and _multiple answer questions_ (using checkboxes). Every question begins with a single-hash markdown header, for example:
+The first part of every lesson's markdown file is the lesson's content: the text that is visible on the lessons page,
+and is meant to explain a concept specific to this lesson. After this first part, it is possible to include questions
+testing the user's understanding at the end of the lesson. To do so, first introduce the questions section
+separator: `?---?` and write your questions after it. At this moment there are two types of questions: _single answer
+questions_ (using radio buttons) and _multiple answer questions_ (using checkboxes). Every question begins with a
+single-hash markdown header, for example:
 
 ```md
 # What is 1+1?
 ```
 
-It is possible to include code blocks, tables and other markdown elements that are not children of the header element, but they must follow the header element.
+It is possible to include code blocks, tables and other markdown elements that are not children of the header element,
+but they must follow the header element.
 
-After the question text, you must provide the question's answer choices, by specifying an unordered markdown list. It can be defined either using dashes (`-`) or asterisks (`*`). However, the character you choose determines the type of the question. Dashes are used for single answer questions and asterisks for multiple answer questions. To indicate whether the answer is correct you should use the markdown checkboxes that follow the list character. Two examples below exemplify this behaviour:
+After the question text, you must provide the question's answer choices, by specifying an unordered markdown list. It
+can be defined either using dashes (`-`) or asterisks (`*`). However, the character you choose determines the type of
+the question. Dashes are used for single answer questions and asterisks for multiple answer questions. To indicate
+whether the answer is correct you should use the markdown checkboxes that follow the list character. Two examples below
+exemplify this behaviour:
 
 Single answer question:
+
 ~~~md
 # What is the result of expression below?
 
@@ -115,12 +143,13 @@ Single answer question:
 2+2
 ```
 
- - [ ] 3
- - [X] 4
- - [ ] 7
+- [ ] 3
+- [X] 4
+- [ ] 7
 ~~~
 
 Multiple answer question:
+
 ~~~md
 # What is the result of expression below?
 
@@ -128,10 +157,10 @@ Multiple answer question:
 2+2
 ```
 
- * [ ] 3
- * [X] 4
- * [ ] 7
- * [X] Four
+* [ ] 3
+* [X] 4
+* [ ] 7
+* [X] Four
 ~~~
 
 To summarize, let's look on a sample lesson containing some mock content and two questions:
@@ -151,9 +180,9 @@ To add two numbers ...
 
 # What is the result of the expression, `2+2`?
 
- - [ ] 3
- - [X] 4
- - [ ] 7
+- [ ] 3
+- [X] 4
+- [ ] 7
 
 # What is the result of expression below?
 
@@ -161,16 +190,17 @@ To add two numbers ...
 2+2
 ```
 
- * [ ] 3
- * [X] 4
- * [ ] 7
- * [X] Four
+* [ ] 3
+* [X] 4
+* [ ] 7
+* [X] Four
 
 ~~~
 
 ### Authors
 
-Courses' authors are defined in the [authors.json](/authors.json) file. This file contains a list of `Author` objects. The `Author` JSON object has following structure:
+Courses' authors are defined in the [authors.json](/authors.json) file. This file contains a list of `Author` objects.
+The `Author` JSON object has following structure:
 
 | Field name | Type             | Description                                 |
 |------------|------------------|---------------------------------------------|
@@ -186,7 +216,8 @@ Courses' authors are defined in the [authors.json](/authors.json) file. This fil
 
 ### Companies
 
-Courses' authors are defined in the [companies.json](/companies.json) file. This file contains a list of `Company` objects. The `Company` JSON object has following structure:
+Courses' authors are defined in the [companies.json](/companies.json) file. This file contains a list of `Company`
+objects. The `Company` JSON object has following structure:
 
 | Field name | Type             | Description                                 |
 |------------|------------------|---------------------------------------------|
